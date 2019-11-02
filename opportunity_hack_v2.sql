@@ -74,9 +74,9 @@ CREATE TABLE IF NOT EXISTS `donation_catagory` (
 DROP TABLE IF EXISTS `donors`;
 CREATE TABLE IF NOT EXISTS `donors` (
   `donorid` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(256) NOT NULL,
   `contact` varchar(20) NOT NULL,
   `email` varchar(256) DEFAULT NULL,
-  `category` int(11) NOT NULL,
   PRIMARY KEY (`donorid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -91,6 +91,7 @@ CREATE TABLE IF NOT EXISTS `inventory` (
   `itemid` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(1024) NOT NULL,
   `quantity` int(11) NOT NULL,
+  `category` int(11) NOT NULL,
   PRIMARY KEY (`itemid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
