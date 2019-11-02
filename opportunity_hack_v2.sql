@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `priority_level` (
 DROP TABLE IF EXISTS `role`;
 CREATE TABLE IF NOT EXISTS `role` (
   `roleid` int(11) NOT NULL AUTO_INCREMENT,
-  `role_name` int(11) NOT NULL,
+  `role_name` varchar(50) NOT NULL,
   PRIMARY KEY (`roleid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -140,6 +140,22 @@ CREATE TABLE IF NOT EXISTS `users` (
   `pwd` varchar(130) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+insert into role(role_name) values('donor');
+insert into role(role_name) values('volunteer');
+insert into role(role_name) values('admin');
+
+
+insert into priority_level(level) values('high');
+insert into priority_level(level) values('medium');
+insert into priority_level(level) values('low');
+
+
+insert into donation_catagory(description) values('food');
+insert into donation_catagory(description) values('clothes');
+insert into donation_catagory(description) values('health-care');
+insert into donation_catagory(description) values('other');
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
