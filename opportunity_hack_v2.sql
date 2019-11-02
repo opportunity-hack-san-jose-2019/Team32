@@ -45,25 +45,12 @@ DROP TABLE IF EXISTS `cases`;
 CREATE TABLE IF NOT EXISTS `cases` (
   `caseid` int(11) NOT NULL AUTO_INCREMENT,
   `problem_description` varchar(4096) NOT NULL,
-  `priority` int(11) NOT NULL,
-  `assigned_priority` int(11) NOT NULL,
+  `priority` ENUM('low', 'medium', 'high') NOT NULL,
+  `assigned_priority` ENUM('low', 'medium', 'high') NOT NULL,
   `is_sensitive` tinyint(1) NOT NULL,
   `requirements` varchar(4096) NOT NULL,
   PRIMARY KEY (`caseid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `donation_catagory`
---
-
-DROP TABLE IF EXISTS `donation_catagory`;
-CREATE TABLE IF NOT EXISTS `donation_catagory` (
-  `catagoryid` int(11) NOT NULL AUTO_INCREMENT,
-  `description` varchar(256) NOT NULL,
-  PRIMARY KEY (`catagoryid`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -91,34 +78,8 @@ CREATE TABLE IF NOT EXISTS `inventory` (
   `itemid` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(1024) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `category` int(11) NOT NULL,
+  `category` ENUM('clothes', 'food', 'health-care', 'other') NOT NULL,
   PRIMARY KEY (`itemid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `priority_level`
---
-
-DROP TABLE IF EXISTS `priority_level`;
-CREATE TABLE IF NOT EXISTS `priority_level` (
-  `priorityid` int(11) NOT NULL AUTO_INCREMENT,
-  `level` varchar(20) NOT NULL,
-  PRIMARY KEY (`priorityid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `role`
---
-
-DROP TABLE IF EXISTS `role`;
-CREATE TABLE IF NOT EXISTS `role` (
-  `roleid` int(11) NOT NULL AUTO_INCREMENT,
-  `role_name` varchar(50) NOT NULL,
-  PRIMARY KEY (`roleid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -136,26 +97,11 @@ CREATE TABLE IF NOT EXISTS `users` (
   `address` varchar(2048) NOT NULL,
   `primary_contact` varchar(20) NOT NULL,
   `secondary_contact` varchar(20) DEFAULT NULL,
-  `role` int(11) NOT NULL,
+  `role` ENUM('admin', 'volunteer', 'donor') NOT NULL NOT NULL,
   `username` varchar(50) NOT NULL,
   `pwd` varchar(130) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-insert into role(role_name) values('donor');
-insert into role(role_name) values('volunteer');
-insert into role(role_name) values('admin');
-
-
-insert into priority_level(level) values('high');
-insert into priority_level(level) values('medium');
-insert into priority_level(level) values('low');
-
-
-insert into donation_catagory(description) values('food');
-insert into donation_catagory(description) values('clothes');
-insert into donation_catagory(description) values('health-care');
-insert into donation_catagory(description) values('other');
 
 COMMIT;
 
