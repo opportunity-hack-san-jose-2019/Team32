@@ -17,6 +17,7 @@
 
 */
 import React from "react";
+import axios from 'axios';
 
 // reactstrap components
 import {
@@ -26,6 +27,7 @@ import {
   CardBody,
   CardFooter,
   CardTitle,
+  Dropdown,
   FormGroup,
   Form,
   Input,
@@ -34,10 +36,121 @@ import {
 } from "reactstrap";
 
 class User extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name:'',
+      contact:'',
+      email:'',
+      clothingDesc:'',
+      foodDesc:'',
+      medicineDesc:'',
+      otherDesc:'',
+      numberOfClothes: 0,
+      numberOfFood: 0,
+      numberOfMedicine: 0,
+      numberOfOther: 0,
+
+    };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.submitDonation = this.submitDonation.bind(this);
+  }
+  
+  /* onSubmit = (e) => {
+    e.preventDefault();
+    // get our form data out of state
+    const { name, phoneNumber , email } = this.state;
+
+    axios.post('http://10.225.125.24:5000/donate', { name, email, phoneNumber })
+      .then((result) => {
+        //access the results here....
+        console.log("done");
+        console.log(result);
+      });
+  } */
+
+  submitDonation = (e) => {
+    var headers = new Headers();
+    e.preventDefault();
+    console.log("",this.state.numberOfClothes,this.state.numberOfFood, this.state.numberOfMedicine, this.state.numberOfOther)
+    var arrayClothes={};
+    var arrayFood={};
+    var arrayMedicine={};
+    var arrayOthers={};
+    if (this.state.numberOfClothes!=0){
+      arrayClothes={
+        "category":"clothes",
+        "quantity":this.state.numberOfClothes,
+        "description": this.state.clothingDesc
+      }
+    }
+    if (this.state.numberOfFood!=0){
+      arrayFood={
+        "category":"food",
+        "quantity":this.state.numberOfFood,
+        "description": this.state.foodDesc
+      }
+    }
+    if (this.state.numberOfMedicine!=0){
+      arrayMedicine={
+        "category":"health-care",
+        "quantity":this.state.numberOfMedicine,
+        "description": this.state.medicineDesc
+      }
+    }
+    if (this.state.numberOfOther!=0){
+      arrayOthers={
+        "category":"other",
+        "quantity":this.state.numberOfOther,
+        "description": this.state.otherDesc
+      }
+    }
+    
+    var data = {
+        email : this.state.email, 
+        name : this.state.name,
+        contact : this.state.contact,
+        items: [arrayClothes,arrayFood,arrayMedicine,arrayOthers]
+    }
+
+    console.log("data : ",  data);
+    //axios.defaults.withCredentials = true;
+    axios.post('http://10.225.125.24:5000/donate', data, { headers: { 'Content-Type': 'application/json'}})
+        .then(response => { 
+        console.log("response :", response)
+        if(response.status == 200)
+        {
+          console.log("ok response");
+        }
+            
+            
+            //swal("User logged in Successfully!", "", "success");
+    })
+    .catch(error => {
+        console.log(error)
+    });
+}
+
+
+ handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
   render() {
+    const { name, email, contact, clothingDesc, medicineDesc, foodDesc, numberOfClothes, numberOfFood, numberOfMedicine, numberOfOther } = this.state;
     return (
       <>
         <div className="content">
+          <Row>
+            <Col>
+            </Col>
+          </Row>
           <Row>
             <Col md="2">
               {/* <Card className="card-user">
@@ -190,29 +303,30 @@ class User extends React.Component {
             <Col md="8">
               <Card className="card-user">
                 <CardHeader>
-                  <CardTitle tag="h5">Donation form</CardTitle>
+                  <CardTitle tag="h5">Item Donation form</CardTitle>
                 </CardHeader>
                 <CardBody>
-                  <Form>
+                  <Form onSubmit={this.submitDonation.bind(this)}>
                     <Row>
                       <Col className="pr-1" md="5">
                         <FormGroup>
-                          <label>Company (disabled)</label>
+                          <label>Name</label>
                           <Input
-                            defaultValue="Creative Code Inc."
-                            disabled
-                            placeholder="Company"
                             type="text"
+                            name="name"
+                            value={name}
+                            onChange={this.handleInputChange}
                           />
                         </FormGroup>
                       </Col>
                       <Col className="px-1" md="3">
                         <FormGroup>
-                          <label>Username</label>
+                          <label>Phone Number</label>
                           <Input
-                            defaultValue="michael23"
-                            placeholder="Username"
                             type="text"
+                            name="contact"
+                            value={contact}
+                            onChange={this.handleInputChange}
                           />
                         </FormGroup>
                       </Col>
@@ -221,80 +335,147 @@ class User extends React.Component {
                           <label htmlFor="exampleInputEmail1">
                             Email address
                           </label>
-                          <Input placeholder="Email" type="email" />
+                          <Input type="email"
+                          name="email"
+                          value={email}
+                          onChange={this.handleInputChange} />
                         </FormGroup>
                       </Col>
                     </Row>
-                    <Row>
-                      <Col className="pr-1" md="6">
-                        <FormGroup>
-                          <label>First Name</label>
-                          <Input
-                            defaultValue="Chet"
-                            placeholder="Company"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col className="pl-1" md="6">
-                        <FormGroup>
-                          <label>Last Name</label>
-                          <Input
-                            defaultValue="Faker"
-                            placeholder="Last Name"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col md="12">
-                        <FormGroup>
-                          <label>Address</label>
-                          <Input
-                            defaultValue="Melbourne, Australia"
-                            placeholder="Home Address"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
+
                     <Row>
                       <Col className="pr-1" md="4">
                         <FormGroup>
-                          <label>City</label>
+                          <label>Item</label>
                           <Input
-                            defaultValue="Melbourne"
-                            placeholder="City"
+                            disabled
+                            placeholder = "Clothing"
                             type="text"
                           />
                         </FormGroup>
                       </Col>
                       <Col className="px-1" md="4">
                         <FormGroup>
-                          <label>Country</label>
+                          <label>Description</label>
                           <Input
-                            defaultValue="Australia"
-                            placeholder="Country"
                             type="text"
+                            name="clothingDesc"
+                            placeholder="N/A"
+                            value={clothingDesc}
+                            onChange={this.handleInputChange}
                           />
                         </FormGroup>
                       </Col>
                       <Col className="pl-1" md="4">
-                        <FormGroup>
-                          <label>Postal Code</label>
-                          <Input placeholder="ZIP Code" type="number" />
+                        <FormGroup>                          
+                          <label>Number of items</label>
+                              <Input
+                              name="numberOfClothes"
+                              type="number"
+                              value={numberOfClothes}
+                              onChange={this.handleInputChange} />                          
                         </FormGroup>
                       </Col>
                     </Row>
                     <Row>
-                      <Col md="12">
+                      <Col className="pr-1" md="4">
                         <FormGroup>
-                          <label>About Me</label>
+                          <label>Item</label>
                           <Input
-                            type="textarea"
-                            defaultValue="Oh so, your weak rhyme You doubt I'll bother, reading into it"
+                            disabled
+                            placeholder = "Medicines"
+                            type="text"
                           />
+                        </FormGroup>
+                      </Col>
+                      <Col className="px-1" md="4">
+                        <FormGroup>
+                          <label>Description</label>
+                          <Input
+                            placeholder="N/A"
+                            type="text"
+                            name="medicineDesc"
+                            value={medicineDesc}
+                            onChange={this.handleInputChange}
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col className="pl-1" md="4">
+                        <FormGroup>                          
+                          <label>Number of items</label>
+                              <Input
+                              name="numberOfMedicine"
+                              type="number"
+                              value={this.state.numberOfMedicine}
+                              onChange={this.handleInputChange} />                          
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col className="pr-1" md="4">
+                        <FormGroup>
+                          <label>Item</label>
+                          <Input
+                            disabled
+                            placeholder = "Food"
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col className="px-1" md="4">
+                        <FormGroup>
+                          <label>Description</label>
+                          <Input
+                            placeholder="N/A"
+                            type="text"
+                            name="foodDesc"
+                            value={foodDesc}
+                            onChange={this.handleInputChange}
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col className="pl-1" md="4">
+                        <FormGroup>                          
+                          <label>Number of items</label>
+                              <Input
+                              name="numberOfFood"
+                              type="number"
+                              value={this.state.numberOfFood}
+                              onChange={this.handleInputChange} />                          
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col className="pr-1" md="4">
+                        <FormGroup>
+                          <label>Item</label>
+                          <Input
+                            disabled
+                            placeholder = "Ohers"
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col className="px-1" md="4">
+                        <FormGroup>
+                          <label>Description</label>
+                          <Input
+                            placeholder="N/A"
+                            type="text"
+                            name="otherDesc"
+                            value={this.state.otherDesc}
+                            onChange={this.handleInputChange}
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col className="pl-1" md="4">
+                        <FormGroup>                          
+                          <label>Number of items</label>
+                              <Input
+                              name="numberOfOther"
+                              type="number"
+                              value={this.state.numberOfOther}
+                              onChange={this.handleInputChange} />                          
                         </FormGroup>
                       </Col>
                     </Row>
@@ -304,8 +485,9 @@ class User extends React.Component {
                           className="btn-round"
                           color="primary"
                           type="submit"
+                          onClick = {this.submitDonation}
                         >
-                          Update Profile
+                          Submit
                         </Button>
                       </div>
                     </Row>
@@ -313,6 +495,15 @@ class User extends React.Component {
                 </CardBody>
               </Card>
             </Col>
+          </Row>
+          <Row>
+            <Col md="2"></Col>
+            <Col md="8">
+            <Card className="card-user">
+              <CardBody>
+                
+              </CardBody>
+              </Card></Col>
           </Row>
         </div>
       </>

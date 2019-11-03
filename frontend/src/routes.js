@@ -19,13 +19,21 @@
 import Dashboard from "views/Dashboard.jsx";
 import Notifications from "views/Notifications.jsx";
 import Icons from "views/Icons.jsx";
-import Typography from "views/Typography.jsx";
+import SeekHelp from "views/SeekHelp.jsx";
 import TableList from "views/Tables.jsx";
-import Maps from "views/Map.jsx";
-import UserPage from "views/User.jsx";
-import UpgradeToPro from "views/Upgrade.jsx";
+import Volunteer from "views/Volunteer.jsx";
+import Donor from "views/Donor.jsx";
+import Admin1 from "views/Admin.jsx";
+import Home from "views/Home.jsx";
 
 var routes = [
+  {
+    path: "/home",
+    name: "Home",
+    icon: "nc-icon nc-bank",
+    component: Home,
+    layout: "/admin"
+  },
   {
     path: "/dashboard",
     name: "Dashboard",
@@ -41,10 +49,10 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/maps",
-    name: "Maps",
-    icon: "nc-icon nc-pin-3",
-    component: Maps,
+    path: "/volunteer",
+    name: "Volunteer",
+    icon: "nc-icon nc-single-02",
+    component: Volunteer,
     layout: "/admin"
   },
   {
@@ -55,10 +63,10 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/user-page",
-    name: "User Profile",
-    icon: "nc-icon nc-single-02",
-    component: UserPage,
+    path: "/donate",
+    name: "Donate",
+    icon: "nc-icon nc-cart-simple",
+    component: Donor,
     layout: "/admin"
   },
   {
@@ -69,18 +77,17 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/typography",
-    name: "Typography",
-    icon: "nc-icon nc-caps-small",
-    component: Typography,
+    path: "/seekHelp",
+    name: "Seek Help",
+    icon: "nc-icon nc-ambulance",
+    component: SeekHelp,
     layout: "/admin"
   },
   {
-    pro: true,
-    path: "/upgrade",
-    name: "Upgrade to PRO",
-    icon: "nc-icon nc-spaceship",
-    component: UpgradeToPro,
+    path: "/admin1",
+    name: "Admin",
+    icon: "nc-icon nc-circle-10",
+    component: Admin1,
     layout: "/admin"
   }
 ];
