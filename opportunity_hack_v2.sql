@@ -49,6 +49,9 @@ CREATE TABLE IF NOT EXISTS `cases` (
   `assigned_priority` ENUM('low', 'medium', 'high') NOT NULL,
   `help_type` ENUM('family-service', 'disaster-service') NOT NULL,
   `requirements` varchar(4096) NOT NULL,
+  `name` varchar(500) NOT NULL,
+  'contact` varchar(20) NOT NULL,
+  `address` varchar(1024) NOT NULL,
   PRIMARY KEY (`caseid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
