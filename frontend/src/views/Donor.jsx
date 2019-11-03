@@ -497,13 +497,22 @@ class User extends React.Component {
             </Col>
           </Row>
           <Row>
-            <Col md="2"></Col>
-            <Col md="8">
+            <Col md="3"></Col>
+            <Col md="6">
             <Card className="card-user">
+              <CardHeader>
+              <CardTitle tag="h5">Payment Donation</CardTitle>
+              </CardHeader>
               <CardBody>
-                
+              <a href="https://www.paypal.com/for-you/transfer-money/send-money">
+  <img src={require('./paypal.png')} />
+</a>
               </CardBody>
+              <CardFooter>
+              
+              </CardFooter>
               </Card></Col>
+
           </Row>
         </div>
       </>

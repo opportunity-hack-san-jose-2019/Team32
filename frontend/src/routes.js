@@ -34,20 +34,20 @@ var routes = [
     component: Home,
     layout: "/admin"
   },
-  {
+  /* {
     path: "/dashboard",
     name: "Dashboard",
     icon: "nc-icon nc-bank",
     component: Dashboard,
     layout: "/admin"
-  },
-  {
+  }, */
+  /* {
     path: "/icons",
     name: "Icons",
     icon: "nc-icon nc-diamond",
     component: Icons,
     layout: "/admin"
-  },
+  }, */
   {
     path: "/volunteer",
     name: "Volunteer",
@@ -55,13 +55,13 @@ var routes = [
     component: Volunteer,
     layout: "/admin"
   },
-  {
+  /* {
     path: "/notifications",
     name: "Notifications",
     icon: "nc-icon nc-bell-55",
     component: Notifications,
     layout: "/admin"
-  },
+  }, */
   {
     path: "/donate",
     name: "Donate",
@@ -69,13 +69,13 @@ var routes = [
     component: Donor,
     layout: "/admin"
   },
-  {
+  /* {
     path: "/tables",
     name: "Table List",
     icon: "nc-icon nc-tile-56",
     component: TableList,
     layout: "/admin"
-  },
+  }, */
   {
     path: "/seekHelp",
     name: "Seek Help",

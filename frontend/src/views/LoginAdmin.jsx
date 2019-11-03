@@ -84,7 +84,7 @@ adminLogin = (e) => {
   }, 1000);
   this.sendData();
   
-  axios.defaults.withCredentials = true;
+  /* axios.defaults.withCredentials = true;
   axios.get('http://10.225.125.24:5000/login', data, { headers: { 'Content-Type': 'application/json'}})
       .then(response => { 
       console.log("response :", response)
@@ -103,7 +103,7 @@ adminLogin = (e) => {
   })
   .catch(error => {
       console.log(error)
-  });
+  }); */
 }
 
  handleInputChange(event) {

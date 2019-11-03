@@ -67,7 +67,9 @@ We specialize in disaster relief and rehabilitation. Our development programs fo
                   <CardTitle tag="h5">Our Website</CardTitle>
                 </CardHeader>
                 <CardBody>
-                <img src={require('./sewa.PNG')}/>
+                <a href="https://sewausa.org/">
+  <img src={require('./sewa.PNG')} />
+</a>
                 </CardBody>
               </Card>
             </Col>
