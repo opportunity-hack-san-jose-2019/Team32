@@ -29,3 +29,10 @@
 
 ## Architecture
 ![arch](https://github.com/opportunity-hack-san-jose-2019/Team32/blob/master/block-diagram.jpg)
+
+## DB Design
+### ER Diagram
+![db](https://github.com/opportunity-hack-san-jose-2019/Team32/blob/master/er-diagram.png)
+
+### DB Tables
+![tables](https://github.com/opportunity-hack-san-jose-2019/Team32/blob/master/tables.PNG)
