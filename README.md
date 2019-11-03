@@ -28,4 +28,4 @@
 3. Volunteer can view the requests assigned and respond to them as required <br/>
 
 ## Architecture
-[!arch](https://github.com/opportunity-hack-san-jose-2019/Team32/blob/master/block-diagram.jpg)
+![arch](https://github.com/opportunity-hack-san-jose-2019/Team32/blob/master/block-diagram.jpg)
