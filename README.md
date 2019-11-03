@@ -26,3 +26,6 @@
 1. Person needing help submits a ticket <br/>
 2. Admin views the requests received and assigns them to volunteers <br/>
 3. Volunteer can view the requests assigned and respond to them as required <br/>
+
+## Architecture
+[!arch](https://github.com/opportunity-hack-san-jose-2019/Team32/blob/master/block-diagram.jpg)
